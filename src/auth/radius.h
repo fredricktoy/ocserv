@@ -43,22 +43,22 @@ struct radius_ctx_st {
 	char *groupnames[MAX_GROUPS];
 	unsigned groupnames_size;
 
-	char remote_ip[MAX_IP_STR];
-	char our_ip[MAX_IP_STR];
+	char remote_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
+	char our_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 	unsigned interim_interval_secs;
 	unsigned session_timeout_secs;
 
 	/* variables for configuration */
-	char ipv4[MAX_IP_STR];
-	char ipv4_mask[MAX_IP_STR];
-	char ipv4_dns1[MAX_IP_STR];
-	char ipv4_dns2[MAX_IP_STR];
+	char ipv4[INET_ADDRSTRLEN];
+	char ipv4_mask[INET_ADDRSTRLEN];
+	char ipv4_dns1[INET_ADDRSTRLEN];
+	char ipv4_dns2[INET_ADDRSTRLEN];
 
-	char ipv6[MAX_IP_STR];
-	char ipv6_net[MAX_IP_STR];
+	char ipv6[INET6_ADDRSTRLEN];
+	char ipv6_net[INET6_ADDRSTRLEN];
 	uint16_t ipv6_subnet_prefix;
-	char ipv6_dns1[MAX_IP_STR];
-	char ipv6_dns2[MAX_IP_STR];
+	char ipv6_dns1[INET6_ADDRSTRLEN];
+	char ipv6_dns2[INET6_ADDRSTRLEN];
 
 	char **routes;
 	unsigned routes_size;

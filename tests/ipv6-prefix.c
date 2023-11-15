@@ -19,18 +19,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
 
 #include "../src/ip-util.h"
 #include "../src/ip-util.c"
 
-static char* my_ipv6_prefix_to_mask(char str[MAX_IP_STR], unsigned prefix)
+static char* my_ipv6_prefix_to_mask(char str[INET6_ADDRSTRLEN], unsigned prefix)
 {
 	struct in6_addr in;
 
 	if (ipv6_prefix_to_mask(&in, prefix) == 0)
 		return NULL;
 
-	if (inet_ntop(AF_INET6, &in, str, MAX_IP_STR) == NULL)
+	if (inet_ntop(AF_INET6, &in, str, INET6_ADDRSTRLEN) == NULL)
 		return NULL;
 
 	return str;
@@ -39,7 +40,7 @@ static char* my_ipv6_prefix_to_mask(char str[MAX_IP_STR], unsigned prefix)
 int main(void)
 {
 	char *p;
-	char str[MAX_IP_STR];
+	char str[INET6_ADDRSTRLEN];
 
 	p = my_ipv6_prefix_to_mask(str, 128);
 	if (p == NULL || strcmp(p, "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff") != 0) {

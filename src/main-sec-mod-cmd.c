@@ -26,6 +26,7 @@
 #include <sys/uio.h>
 #include <sys/select.h>
 #include <sys/wait.h>
+#include <netinet/in.h>
 #include <fcntl.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -459,9 +460,9 @@ int session_open(sec_mod_instance_st * sec_mod_instance, struct proc_st *proc, c
 	main_server_st * s = sec_mod_instance->server;
 	SecmSessionOpenMsg ireq = SECM_SESSION_OPEN_MSG__INIT;
 	SecmSessionReplyMsg *msg = NULL;
-	char str_ipv4[MAX_IP_STR];
-	char str_ipv6[MAX_IP_STR];
-	char str_ip[MAX_IP_STR];
+	char str_ipv4[INET_ADDRSTRLEN];
+	char str_ipv6[INET6_ADDRSTRLEN];
+	char str_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 
 	if (cookie == NULL || cookie_size != SID_SIZE)
 		return -1;

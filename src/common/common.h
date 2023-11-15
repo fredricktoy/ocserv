@@ -34,8 +34,6 @@
 void _talloc_free2(void *ctx, void *ptr);
 void *_talloc_size2(void *ctx, size_t size);
 
-#define MAX_IP_STR 46
-
 #define DEFAULT_SOCKET_TIMEOUT 10
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))

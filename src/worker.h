@@ -28,6 +28,7 @@
 
 #include <unistd.h>
 #include <net/if.h>
+#include <netinet/in.h>
 #include <vpn.h>
 #include <tlslib.h>
 #include <common.h>
@@ -222,12 +223,12 @@ typedef struct worker_st {
 	socklen_t our_addr_len;
 	struct sockaddr_storage remote_addr;	/* peer's address */
 	socklen_t remote_addr_len;
-	char our_ip_str[MAX_IP_STR];
-	char remote_ip_str[MAX_IP_STR];
+	char our_ip_str[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
+	char remote_ip_str[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 
 	/* this is a snapshot of remote_ip_str at process start - doesn't
 	 * get updated. */
-	char orig_remote_ip_str[MAX_IP_STR];
+	char orig_remote_ip_str[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 	const uint8_t sec_auth_init_hmac[HMAC_DIGEST_SIZE];
 
 	int proto; /* AF_INET or AF_INET6 */

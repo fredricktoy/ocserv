@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <sys/select.h>
@@ -286,7 +287,7 @@ int handle_worker_commands(main_server_st * s, struct proc_st *proc)
 	case CMD_BAN_IP:{
 			BanIpMsg *tmsg;
 			BanIpReplyMsg reply = BAN_IP_REPLY_MSG__INIT;
-			char remote_address[MAX_IP_STR];
+			char remote_address[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 
 			tmsg = ban_ip_msg__unpack(&pa, raw_len, raw);
 			if (tmsg == NULL) {

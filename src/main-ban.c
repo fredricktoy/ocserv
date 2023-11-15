@@ -34,6 +34,7 @@
 #include <errno.h>
 #include <sys/ioctl.h>
 #include <sys/un.h>
+#include <netinet/in.h>
 #include <common.h>
 #include <syslog.h>
 #include <vpn.h>
@@ -132,7 +133,7 @@ int add_ip_to_ban_list(main_server_st *s, const unsigned char *ip, unsigned ip_s
 	time_t now = time(NULL);
 	time_t expiration = now + GETCONFIG(s)->min_reauth_time;
 	int ret = 0;
-	char str_ip[MAX_IP_STR];
+	char str_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 	const char *p_str_ip = NULL;
 	unsigned print_msg;
 
@@ -238,7 +239,7 @@ int remove_ip_from_ban_list(main_server_st *s, const uint8_t *ip, unsigned size)
 	struct htable *db = s->ban_db;
 	struct ban_entry_st *e;
 	ban_entry_st t;
-	char txt_ip[MAX_IP_STR];
+	char txt_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 
 	if (db == NULL || ip == NULL || size == 0)
 		return 0;
@@ -272,7 +273,7 @@ unsigned check_if_banned(main_server_st *s, struct sockaddr_storage *addr, sockl
 	time_t now;
 	ban_entry_st t, *e;
 	unsigned in_size;
-	char txt[MAX_IP_STR];
+	char txt[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 
 	if (db == NULL || GETCONFIG(s)->max_ban_score == 0)
 		return 0;

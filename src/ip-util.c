@@ -46,7 +46,7 @@ int ip_cmp(const struct sockaddr_storage *s1, const struct sockaddr_storage *s2)
 char* ipv4_prefix_to_strmask(void *pool, unsigned prefix)
 {
 	struct in_addr in;
-	char str[MAX_IP_STR];
+	char str[INET_ADDRSTRLEN];
 
 	if (prefix == 0 || prefix > 32)
 		return NULL;

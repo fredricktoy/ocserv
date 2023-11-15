@@ -33,6 +33,7 @@
 #include <occtl/occtl.h>
 #include <common.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
 #include <system.h>
 #include <termios.h>
 #include <unistd.h>
@@ -970,7 +971,7 @@ int handle_list_banned_cmd(struct unix_ctx *ctx, const char *arg, cmd_params_st 
 	struct tm *tm, _tm;
 	time_t t;
 	PROTOBUF_ALLOCATOR(pa, ctx);
-	char txt_ip[MAX_IP_STR];
+	char txt_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 	const char *tmp_str;
 
 	init_reply(&raw);

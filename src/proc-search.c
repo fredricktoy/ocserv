@@ -127,7 +127,7 @@ int proc_table_add(main_server_st *s, struct proc_st *proc)
 int proc_table_update_ip(main_server_st *s, struct proc_st *proc, struct sockaddr_storage *addr,
 			 unsigned addr_size)
 {
-	char buf[MAX_IP_STR];
+	char buf[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 	unsigned removed;
 
 	/* only update if we can remove the old IP */

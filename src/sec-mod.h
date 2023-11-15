@@ -70,13 +70,13 @@ typedef struct common_acct_info_st {
 	char username[MAX_USERNAME_SIZE*2];
 	char groupname[MAX_GROUPNAME_SIZE]; /* the owner's group */
 	char safe_id[SAFE_ID_SIZE]; /* an ID to be sent to external apps - printable */
-	char remote_ip[MAX_IP_STR];
+	char remote_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 	char user_agent[MAX_AGENT_NAME];
 	char device_type[MAX_DEVICE_TYPE];
 	char device_platform[MAX_DEVICE_PLATFORM];
-	char our_ip[MAX_IP_STR];
-	char ipv4[MAX_IP_STR];
-	char ipv6[MAX_IP_STR];
+	char our_ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
+	char ipv4[INET_ADDRSTRLEN];
+	char ipv6[INET6_ADDRSTRLEN];
 	unsigned id;
 } common_acct_info_st;
 

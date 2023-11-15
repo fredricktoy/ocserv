@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/select.h>
 #include <sys/wait.h>
@@ -106,10 +107,10 @@ int send_cookie_auth_reply(main_server_st* s, struct proc_st* proc,
 	int ret;
 
 	if (r == AUTH__REP__OK && proc->tun_lease.name[0] != 0) {
-		char ipv6[MAX_IP_STR];
-		char ipv4[MAX_IP_STR];
-		char ipv6_local[MAX_IP_STR];
-		char ipv4_local[MAX_IP_STR];
+		char ipv6[INET6_ADDRSTRLEN];
+		char ipv4[INET_ADDRSTRLEN];
+		char ipv6_local[INET6_ADDRSTRLEN];
+		char ipv4_local[INET_ADDRSTRLEN];
 
 		/* fill message */
 		msg.reply = AUTH__REP__OK;

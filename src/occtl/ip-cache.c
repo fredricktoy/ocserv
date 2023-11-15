@@ -25,9 +25,10 @@
 #include <string.h>
 #include <occtl/occtl.h>
 #include <common.h>
+#include <netinet/in.h>
 
 typedef struct ip_entries_st {
-	char ip[MAX_IP_STR];
+	char ip[INET6_ADDRSTRLEN > INET_ADDRSTRLEN ? INET6_ADDRSTRLEN : INET_ADDRSTRLEN];
 	unsigned ip_size;
 } ip_entries_st;
 
